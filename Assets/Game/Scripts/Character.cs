@@ -28,13 +28,14 @@ public class Character : MonoBehaviour
         _movementVelocity = Quaternion.Euler(0, -45f, 0) * _movementVelocity;
 
         _animator.SetFloat("Speed", _movementVelocity.magnitude);
-        
+
         _movementVelocity *= MoveSpeed * Time.deltaTime;
 
         if (_movementVelocity != Vector3.zero)
         {
             transform.rotation = Quaternion.LookRotation(_movementVelocity);
         }
+        _animator.SetBool("AirBorne", !_characterController.isGrounded);
     }
 
     private void FixedUpdate()
