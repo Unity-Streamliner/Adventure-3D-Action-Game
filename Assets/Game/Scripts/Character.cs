@@ -11,12 +11,14 @@ public class Character : MonoBehaviour
     private Vector3 _movementVelocity;
     private PlayerInput _playerInput;
     private float _verticalVelocity;
+    private Animator _animator;
 
     // Update is called once per frame
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
         _playerInput = GetComponent<PlayerInput>();
+        _animator = GetComponent<Animator>();
     }
 
     private void CalculatePlayerMovement()
@@ -24,6 +26,9 @@ public class Character : MonoBehaviour
         _movementVelocity.Set(_playerInput.HorizontalInput, 0f, _playerInput.VerticalInput);
         _movementVelocity.Normalize();
         _movementVelocity = Quaternion.Euler(0, -45f, 0) * _movementVelocity;
+
+        _animator.SetFloat("Speed", _movementVelocity.magnitude);
+        
         _movementVelocity *= MoveSpeed * Time.deltaTime;
 
         if (_movementVelocity != Vector3.zero)
