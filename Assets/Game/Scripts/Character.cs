@@ -10,7 +10,13 @@ public class Character : MonoBehaviour
     private NavMeshAgent _navMeshAgent;
     private Transform _target;
 
+    // State Machine
+    public enum CharacterState 
+    {
+        Normal, Attacking
+    }
 
+    public CharacterState CurrentState;
     public float MoveSpeed = 5f;
     public float Gravity = -9.8f;
 
@@ -72,6 +78,26 @@ public class Character : MonoBehaviour
 
     private void FixedUpdate()
     {
+        switch(CurrentState) 
+        {
+            case CharacterState.Normal:
+                if (IsPlayer && _playerInput.MouseButtonDown && _characterController.isGrounded)
+                {
+                    SwitchStateTo(CharacterState.Attacking);
+                    return;
+                }
+                HandleMovement();
+                break;
+            case CharacterState.Attacking:
+
+                break;
+        }
+
+          
+    }
+
+    private void HandleMovement()
+    {
         if (IsPlayer)
         {
             CalculatePlayerMovement();
@@ -89,7 +115,40 @@ public class Character : MonoBehaviour
         else
         {
             CalculateEnemyMovement();
-        }
-       
+        } 
     }
+
+    private void SwitchStateTo(CharacterState newState)
+    {
+        // Clear Cache
+        _playerInput.MouseButtonDown = false;
+
+        // Exiting state
+        switch(CurrentState)
+        {
+            case CharacterState.Normal:
+
+                break;
+            case CharacterState.Attacking:
+
+                break;
+        }
+
+        // Entering state
+        switch(newState)
+        {
+            case CharacterState.Normal:
+
+                break;
+            case CharacterState.Attacking:
+
+                break;
+        }
+
+        // Switch State
+        CurrentState = newState;
+
+        print($"Switched to {CurrentState}");
+    }
+
 }

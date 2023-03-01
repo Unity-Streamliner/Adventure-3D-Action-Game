@@ -1023,6 +1023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPlayer: 1
+  CurrentState: 0
   MoveSpeed: 5
   Gravity: -20
 --- !u!114 &1092541061
@@ -1037,6 +1038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 233fb324b926d46588ce7643cd31b1bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MouseButtonDown: 0
   HorizontalInput: 0
   VerticalInput: 0
 --- !u!95 &1092541062
@@ -1357,6 +1359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPlayer: 0
+  CurrentState: 0
   MoveSpeed: 2
   Gravity: -9.8
 --- !u!114 &1230082598
