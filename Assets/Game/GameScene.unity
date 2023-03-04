@@ -1036,6 +1036,8 @@ MonoBehaviour:
   CurrentState: 0
   MoveSpeed: 5
   Gravity: -20
+  AttackSlideDuration: 0.4
+  AttackSlideSpeed: 0.06
 --- !u!114 &1092541061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1373,6 +1375,8 @@ MonoBehaviour:
   CurrentState: 0
   MoveSpeed: 2
   Gravity: -9.8
+  AttackSlideDuration: 0.4
+  AttackSlideSpeed: 0.06
 --- !u!114 &1230082598
 MonoBehaviour:
   m_ObjectHideFlags: 0

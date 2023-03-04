@@ -27,6 +27,11 @@ public class Character : MonoBehaviour
     private Animator _animator;
     private string _playerTag = "Player";
 
+    // Player slides
+    private float attackStartTime;
+    public float AttackSlideDuration = 0.4f;
+    public float AttackSlideSpeed = 0.06f;
+
     // Update is called once per frame
     private void Awake()
     {
@@ -89,7 +94,16 @@ public class Character : MonoBehaviour
                 HandleMovement();
                 break;
             case CharacterState.Attacking:
-
+                if (IsPlayer)
+                {
+                    _movementVelocity = Vector3.zero;
+                    if (Time.time < attackStartTime + AttackSlideDuration)
+                    {
+                        float timePassed = Time.time - attackStartTime;
+                        float lerpTime = timePassed / AttackSlideDuration;
+                        _movementVelocity = Vector3.Lerp(transform.forward * AttackSlideSpeed, Vector3.zero, lerpTime);
+                    }
+                }
                 break;
         }
 
@@ -142,6 +156,10 @@ public class Character : MonoBehaviour
                 break;
             case CharacterState.Attacking:
                 _animator.SetTrigger("Attack");
+                if (IsPlayer)
+                {
+                    attackStartTime = Time.time;
+                }
                 break;
         }
 
