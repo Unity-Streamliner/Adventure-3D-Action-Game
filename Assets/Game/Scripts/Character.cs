@@ -91,7 +91,7 @@ public class Character : MonoBehaviour
                     SwitchStateTo(CharacterState.Attacking);
                     return;
                 }
-                HandleMovement();
+                CalculateMovement();
                 break;
             case CharacterState.Attacking:
                 if (IsPlayer)
@@ -106,25 +106,28 @@ public class Character : MonoBehaviour
                 }
                 break;
         }
-
-          
+        Move();   
     }
 
-    private void HandleMovement()
+    private void Move()
+    {
+        if (!_characterController.isGrounded)
+        {
+            _verticalVelocity = Gravity;
+        }
+        else
+        {
+            _verticalVelocity = Gravity * 0.3f;
+        }
+        _movementVelocity += _verticalVelocity * Vector3.up * Time.deltaTime;
+        _characterController.Move(_movementVelocity);
+    }
+
+    private void CalculateMovement()
     {
         if (IsPlayer)
         {
             CalculatePlayerMovement();
-            if (!_characterController.isGrounded)
-            {
-                _verticalVelocity = Gravity;
-            }
-            else
-            {
-                _verticalVelocity = Gravity * 0.3f;
-            }
-            _movementVelocity += _verticalVelocity * Vector3.up * Time.deltaTime;
-            _characterController.Move(_movementVelocity);
         }
         else
         {
