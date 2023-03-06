@@ -78,6 +78,7 @@ public class Character : MonoBehaviour
         {
             _navMeshAgent.SetDestination(transform.position);
             _animator.SetFloat("Speed", 0f);
+            SwitchStateTo(CharacterState.Attacking);
         }
     }
 
@@ -104,13 +105,21 @@ public class Character : MonoBehaviour
                         _movementVelocity = Vector3.Lerp(transform.forward * AttackSlideSpeed, Vector3.zero, lerpTime);
                     }
                 }
+                else 
+                {
+                    transform.LookAt(_target.position);
+                }
                 break;
         }
-        Move();   
+        MovePlayer();   
     }
 
-    private void Move()
+    private void MovePlayer()
     {
+        if (!IsPlayer) 
+        {
+            return;
+        }
         if (!_characterController.isGrounded)
         {
             _verticalVelocity = Gravity;
@@ -138,7 +147,7 @@ public class Character : MonoBehaviour
     private void SwitchStateTo(CharacterState newState)
     {
         // Clear Cache
-        _playerInput.MouseButtonDown = false;
+        if (IsPlayer) { _playerInput.MouseButtonDown = false; }
 
         // Exiting state
         switch(CurrentState)
