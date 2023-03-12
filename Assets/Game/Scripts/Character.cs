@@ -10,12 +10,17 @@ public class Character : MonoBehaviour
     private NavMeshAgent _navMeshAgent;
     private Transform _target;
 
+    // Health
+    private Health _health;
+
+    // Damage Caster
+    private DamageCaster _damageCaster;
+
     // State Machine
     public enum CharacterState 
     {
         Normal, Attacking
     }
-
     public CharacterState CurrentState;
     public float MoveSpeed = 5f;
     public float Gravity = -9.8f;
@@ -36,6 +41,8 @@ public class Character : MonoBehaviour
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
+        _health = GetComponent<Health>();
+        _damageCaster = GetComponentInChildren<DamageCaster>();
         _animator = GetComponent<Animator>();
         
         if (!IsPlayer)
@@ -184,6 +191,21 @@ public class Character : MonoBehaviour
     public void AttackAnimationEnds()
     {
         SwitchStateTo(CharacterState.Normal);
+    }
+
+    public void ApplyDamage(int damage, Vector3 attachPosition = new Vector3())
+    {
+        _health?.ApplyDamage(damage);
+    }
+
+    public void EnableDamageCaster()
+    {
+        _damageCaster.EnableDamageCaster();
+    }
+
+    public void DisableDamageCaster()
+    {
+        _damageCaster.DisableDamageCaster();
     }
 
 }
