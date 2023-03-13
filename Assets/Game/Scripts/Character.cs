@@ -163,7 +163,10 @@ public class Character : MonoBehaviour
 
                 break;
             case CharacterState.Attacking:
-
+                if (_damageCaster != null)
+                {
+                    DisableDamageCaster();
+                }
                 break;
         }
 
