@@ -23,8 +23,21 @@ public class DamageCaster : MonoBehaviour
         {
             Character target = other.GetComponent<Character>();
             target?.ApplyDamage(Damage);
+            PlayDamageVFX();
 
             _damageTargetList.Add(other);
+        }
+    }
+
+    private void PlayDamageVFX()
+    {
+        RaycastHit hit;
+        Vector3 originalPosition = transform.position + (-_damageCasterCollider.bounds.extents.z) * transform.forward;
+        bool isHit = Physics.BoxCast(originalPosition, _damageCasterCollider.bounds.extents / 2, transform.forward, out hit, transform.rotation, _damageCasterCollider.bounds.extents.z, 1<<6);
+        if (isHit)
+        {
+            PlayerVFXManager playerVFXManager = transform.parent.GetComponent<PlayerVFXManager>();
+            playerVFXManager?.PlaySlash(hit.point + new Vector3(0, 0.5f, 0));
         }
     }
 
@@ -38,5 +51,21 @@ public class DamageCaster : MonoBehaviour
     {
         _damageTargetList.Clear();
         _damageCasterCollider.enabled = false;
+    }
+
+    public void OnDrawGizmos()
+    {
+        if (_damageCasterCollider == null)
+        {
+            _damageCasterCollider = GetComponent<Collider>();
+        }
+        RaycastHit hit;
+        Vector3 originalPosition = transform.position + (-_damageCasterCollider.bounds.extents.z) * transform.forward;
+        bool isHit = Physics.BoxCast(originalPosition, _damageCasterCollider.bounds.extents / 2, transform.forward, out hit, transform.rotation, _damageCasterCollider.bounds.extents.z, 1<<6);
+        if (isHit)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(hit.point, 0.3f);
+        }
     }
 }
