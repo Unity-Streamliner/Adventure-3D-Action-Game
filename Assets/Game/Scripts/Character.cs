@@ -199,6 +199,11 @@ public class Character : MonoBehaviour
     public void ApplyDamage(int damage, Vector3 attachPosition = new Vector3())
     {
         _health?.ApplyDamage(damage);
+
+        if (!IsPlayer)
+        {
+            GetComponent<EnemyVFXManager>().PlayBeingHitVFX(attachPosition);
+        }
     }
 
     public void EnableDamageCaster()

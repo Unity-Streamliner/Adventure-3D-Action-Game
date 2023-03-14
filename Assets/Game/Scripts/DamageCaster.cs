@@ -22,7 +22,7 @@ public class DamageCaster : MonoBehaviour
         if (other.tag == TargetTag && !_damageTargetList.Contains(other))
         {
             Character target = other.GetComponent<Character>();
-            target?.ApplyDamage(Damage);
+            target?.ApplyDamage(Damage, attachPosition: transform.parent.position);
             PlayDamageVFX();
 
             _damageTargetList.Add(other);
@@ -51,21 +51,5 @@ public class DamageCaster : MonoBehaviour
     {
         _damageTargetList.Clear();
         _damageCasterCollider.enabled = false;
-    }
-
-    public void OnDrawGizmos()
-    {
-        if (_damageCasterCollider == null)
-        {
-            _damageCasterCollider = GetComponent<Collider>();
-        }
-        RaycastHit hit;
-        Vector3 originalPosition = transform.position + (-_damageCasterCollider.bounds.extents.z) * transform.forward;
-        bool isHit = Physics.BoxCast(originalPosition, _damageCasterCollider.bounds.extents / 2, transform.forward, out hit, transform.rotation, _damageCasterCollider.bounds.extents.z, 1<<6);
-        if (isHit)
-        {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(hit.point, 0.3f);
-        }
     }
 }
