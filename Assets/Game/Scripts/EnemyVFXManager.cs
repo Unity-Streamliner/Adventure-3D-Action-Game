@@ -7,7 +7,10 @@ public class EnemyVFXManager : MonoBehaviour
 {
     public VisualEffect FootStep;
     public VisualEffect AttackVFX;
-    public ParticleSystem BeingHitVFX; 
+    public ParticleSystem BeingHitVFX;
+    public VisualEffect BeingHitSplashVFX;
+
+    private float BeingHitSplashVFXDuration = 10f;
 
     public void BurstFootStep()
     {
@@ -26,5 +29,11 @@ public class EnemyVFXManager : MonoBehaviour
         forceForward.y = 0;
         BeingHitVFX.transform.rotation = Quaternion.LookRotation(forceForward);
         BeingHitVFX.Play();
+
+        Vector3 splashPosition = transform.position;
+        splashPosition.y += 2f;
+        VisualEffect newSplashVFX = Instantiate(BeingHitSplashVFX, splashPosition, Quaternion.identity);
+        newSplashVFX.Play();
+        Destroy(newSplashVFX, BeingHitSplashVFXDuration);
     }
 }

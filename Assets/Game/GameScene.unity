@@ -563,7 +563,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3744957851513120300, guid: 5032253f50fbf924285917747193c530, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3744957851513120300, guid: 5032253f50fbf924285917747193c530, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1539,6 +1539,7 @@ MonoBehaviour:
   FootStep: {fileID: 1891398997}
   AttackVFX: {fileID: 1265558068}
   BeingHitVFX: {fileID: 900845577}
+  BeingHitSplashVFX: {fileID: 5091917010390914819, guid: d1fe802ee7b6fc24497016910b9375d6, type: 3}
 --- !u!114 &1230082599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1562,7 +1563,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6572561595865496312, guid: c2792d034b3f4154281cad9326455974, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6572561595865496312, guid: c2792d034b3f4154281cad9326455974, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2078,7 +2079,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5680359259124363205, guid: 0570e3315dd21b34094ca0475d3310a7, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5680359259124363205, guid: 0570e3315dd21b34094ca0475d3310a7, type: 3}
       propertyPath: m_LocalPosition.x
