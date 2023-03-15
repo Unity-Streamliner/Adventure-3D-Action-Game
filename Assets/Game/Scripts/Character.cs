@@ -37,6 +37,10 @@ public class Character : MonoBehaviour
     public float AttackSlideDuration = 0.4f;
     public float AttackSlideSpeed = 0.06f;
 
+    // Material animation
+    private MaterialPropertyBlock _materialPropertyBloc;
+    private SkinnedMeshRenderer _skinnedMeshRenderer;
+
     // Update is called once per frame
     private void Awake()
     {
@@ -44,6 +48,10 @@ public class Character : MonoBehaviour
         _health = GetComponent<Health>();
         _damageCaster = GetComponentInChildren<DamageCaster>();
         _animator = GetComponent<Animator>();
+
+        _skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        _materialPropertyBloc = new MaterialPropertyBlock();
+        _skinnedMeshRenderer.GetPropertyBlock(_materialPropertyBloc);
         
         if (!IsPlayer)
         {
@@ -204,6 +212,8 @@ public class Character : MonoBehaviour
         {
             GetComponent<EnemyVFXManager>().PlayBeingHitVFX(attachPosition);
         }
+
+        StartCoroutine(MaterialBlink());
     }
 
     public void EnableDamageCaster()
@@ -214,6 +224,17 @@ public class Character : MonoBehaviour
     public void DisableDamageCaster()
     {
         _damageCaster.DisableDamageCaster();
+    }
+
+    IEnumerator MaterialBlink()
+    {
+        _materialPropertyBloc.SetFloat("_blink", 0.4f);
+        _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBloc);
+
+        yield return new WaitForSeconds(0.2f);
+
+        _materialPropertyBloc.SetFloat("_blink", 0f);
+        _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBloc);
     }
 
 }
