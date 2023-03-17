@@ -19,7 +19,7 @@ public class Character : MonoBehaviour
     // State Machine
     public enum CharacterState 
     {
-        Normal, Attacking
+        Normal, Attacking, Dead
     }
     public CharacterState CurrentState;
     public float MoveSpeed = 5f;
@@ -125,6 +125,8 @@ public class Character : MonoBehaviour
                     transform.LookAt(_target.position);
                 }
                 break;
+            case CharacterState.Dead:
+                return;
         }
         MovePlayer();   
     }
@@ -159,7 +161,7 @@ public class Character : MonoBehaviour
         } 
     }
 
-    private void SwitchStateTo(CharacterState newState)
+    public void SwitchStateTo(CharacterState newState)
     {
         // Clear Cache
         if (IsPlayer) { _playerInput.MouseButtonDown = false; }
@@ -176,6 +178,8 @@ public class Character : MonoBehaviour
                     DisableDamageCaster();
                 }
                 break;
+            case CharacterState.Dead:
+                return;
         }
 
         // Entering state
@@ -190,6 +194,10 @@ public class Character : MonoBehaviour
                 {
                     attackStartTime = Time.time;
                 }
+                break;
+            case CharacterState.Dead:
+                _characterController.enabled = false;
+                _animator.SetTrigger("Dead");
                 break;
         }
 

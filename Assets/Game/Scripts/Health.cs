@@ -6,17 +6,26 @@ public class Health : MonoBehaviour
 {
     public int MaxHealth;
     public int CurrentHealth;
-    private CharacterController _characterController;
+    private Character _character;
 
     private void Awake()
     {
         CurrentHealth = MaxHealth;
-        _characterController = GetComponent<CharacterController>();
+        _character = GetComponent<Character>();
     }
 
     public void ApplyDamage(int damage)
     {
         CurrentHealth -= damage;
         Debug.Log($"{gameObject.name} took damage: {damage}, current health is: {CurrentHealth}");
+        UpdateToDeadIfNotAlive();
+    }
+
+    private void UpdateToDeadIfNotAlive()
+    {
+        if (CurrentHealth <= 0)
+        {
+            _character.SwitchStateTo(Character.CharacterState.Dead);
+        }
     }
 }
