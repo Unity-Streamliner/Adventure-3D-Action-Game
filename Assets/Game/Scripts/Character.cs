@@ -198,6 +198,7 @@ public class Character : MonoBehaviour
             case CharacterState.Dead:
                 _characterController.enabled = false;
                 _animator.SetTrigger("Dead");
+                StartCoroutine(MaterialDissolve());
                 break;
         }
 
@@ -243,6 +244,28 @@ public class Character : MonoBehaviour
 
         _materialPropertyBloc.SetFloat("_blink", 0f);
         _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBloc);
+    }
+
+    IEnumerator MaterialDissolve()
+    {
+        yield return new WaitForSeconds(2f);
+        float dissolveTimeDuration = 2f;
+        float currentDissolveTime = 0;
+        float dissolveHightStart = 20f;
+        float dissolveHightTarget = -10f;
+        float dissolveHight;
+
+        _materialPropertyBloc.SetFloat("_enableDissolve", 1f);
+        _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBloc);
+
+        while (currentDissolveTime < dissolveTimeDuration)
+        {
+            currentDissolveTime += Time.deltaTime;
+            dissolveHight = Mathf.Lerp(dissolveHightStart, dissolveHightTarget, currentDissolveTime / dissolveTimeDuration);
+            _materialPropertyBloc.SetFloat("_dissolve_height", dissolveHight);
+            _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBloc);
+            yield return null;
+        }
     }
 
 }
