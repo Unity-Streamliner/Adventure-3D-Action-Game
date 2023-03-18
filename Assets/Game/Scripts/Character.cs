@@ -13,6 +13,9 @@ public class Character : MonoBehaviour
     // Health
     private Health _health;
 
+    // Heal Orb
+    public GameObject ItemToDrop;
+
     // Damage Caster
     private DamageCaster _damageCaster;
 
@@ -266,6 +269,14 @@ public class Character : MonoBehaviour
             _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBloc);
             yield return null;
         }
+
+        DropItem();
+    }
+
+    public void DropItem()
+    {
+        if (ItemToDrop == null) { return; }
+        Instantiate(ItemToDrop, transform.position, Quaternion.identity);
     }
 
 }
