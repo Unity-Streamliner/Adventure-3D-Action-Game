@@ -1041,6 +1041,11 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!1 &947940681 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 36d5e239ddf1c5843979b26c82f9ad52, type: 3}
+  m_PrefabInstance: {fileID: 1573625977}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &967860529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1183,6 +1188,7 @@ GameObject:
   - component: {fileID: 1092541062}
   - component: {fileID: 1092541063}
   - component: {fileID: 1092541064}
+  - component: {fileID: 1092541065}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1309,6 +1315,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 100
   CurrentHealth: 0
+--- !u!114 &1092541065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092541057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4949f73227e504fa8ab6e996b94e59bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Weapons:
+  - {fileID: 947940681}
+  - {fileID: 1767413949}
 --- !u!114 &1102135018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2087,6 +2108,11 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!1 &1767413949 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 36d5e239ddf1c5843979b26c82f9ad52, type: 3}
+  m_PrefabInstance: {fileID: 1842760842}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1842760842
 PrefabInstance:
   m_ObjectHideFlags: 0
