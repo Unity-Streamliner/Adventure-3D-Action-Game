@@ -22,7 +22,7 @@ public class Character : MonoBehaviour
     // State Machine
     public enum CharacterState 
     {
-        Normal, Attacking, Dead
+        Normal, Attacking, Dead, BeingHit
     }
     public CharacterState CurrentState;
     public float MoveSpeed = 5f;
@@ -130,6 +130,8 @@ public class Character : MonoBehaviour
                 break;
             case CharacterState.Dead:
                 return;
+            case CharacterState.BeingHit:
+                break;
         }
         MovePlayer();   
     }
@@ -150,6 +152,7 @@ public class Character : MonoBehaviour
         }
         _movementVelocity += _verticalVelocity * Vector3.up * Time.deltaTime;
         _characterController.Move(_movementVelocity);
+        _movementVelocity = Vector3.zero;
     }
 
     private void CalculateMovement()
@@ -183,6 +186,8 @@ public class Character : MonoBehaviour
                 break;
             case CharacterState.Dead:
                 return;
+            case CharacterState.BeingHit:
+                break;
         }
 
         // Entering state
@@ -203,6 +208,9 @@ public class Character : MonoBehaviour
                 _animator.SetTrigger("Dead");
                 StartCoroutine(MaterialDissolve());
                 break;
+            case CharacterState.BeingHit:
+                _animator.SetTrigger("BeingHit");
+                break;
         }
 
         // Switch State
@@ -216,6 +224,11 @@ public class Character : MonoBehaviour
         SwitchStateTo(CharacterState.Normal);
     }
 
+    public void BeingHitAnimationEnds()
+    {
+         SwitchStateTo(CharacterState.Normal);
+    }
+
     public void ApplyDamage(int damage, Vector3 attachPosition = new Vector3())
     {
         _health?.ApplyDamage(damage);
@@ -226,6 +239,11 @@ public class Character : MonoBehaviour
         }
 
         StartCoroutine(MaterialBlink());
+
+        if (IsPlayer)
+        {
+            SwitchStateTo(CharacterState.BeingHit);
+        }
     }
 
     public void EnableDamageCaster()
