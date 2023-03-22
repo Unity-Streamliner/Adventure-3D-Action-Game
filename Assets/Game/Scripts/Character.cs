@@ -39,6 +39,8 @@ public class Character : MonoBehaviour
     private float attackStartTime;
     public float AttackSlideDuration = 0.4f;
     public float AttackSlideSpeed = 0.06f;
+    private Vector3 impactOnCharacter;
+    private float impactForce = 10f;
 
     // Material animation
     private MaterialPropertyBlock _materialPropertyBloc;
@@ -131,6 +133,11 @@ public class Character : MonoBehaviour
             case CharacterState.Dead:
                 return;
             case CharacterState.BeingHit:
+                if (impactOnCharacter.magnitude > 0.2f)
+                {
+                    _movementVelocity = impactOnCharacter * Time.deltaTime;
+                }
+                impactOnCharacter = Vector3.Lerp(impactOnCharacter, Vector3.zero, Time.deltaTime * 5);
                 break;
         }
         MovePlayer();   
@@ -243,7 +250,16 @@ public class Character : MonoBehaviour
         if (IsPlayer)
         {
             SwitchStateTo(CharacterState.BeingHit);
+            AddImpact(attachPosition, impactForce);
         }
+    }
+
+    private void AddImpact(Vector3 attackerPosition, float force)
+    {
+        Vector3 impactDirection = transform.position - attackerPosition;
+        impactDirection.Normalize();
+        impactDirection.y = 0;
+        impactOnCharacter = impactDirection * force;
     }
 
     public void EnableDamageCaster()
