@@ -42,6 +42,9 @@ public class Character : MonoBehaviour
     private Vector3 impactOnCharacter;
     private float impactForce = 10f;
 
+    public bool IsInvincible;
+    public float InvincibleDuration = 2f;
+
     // Material animation
     private MaterialPropertyBlock _materialPropertyBloc;
     private SkinnedMeshRenderer _skinnedMeshRenderer;
@@ -217,6 +220,11 @@ public class Character : MonoBehaviour
                 break;
             case CharacterState.BeingHit:
                 _animator.SetTrigger("BeingHit");
+                if (IsPlayer)
+                {
+                    IsInvincible = true;
+                    StartCoroutine(DelayCancelInvincible());
+                }
                 break;
         }
 
@@ -238,6 +246,10 @@ public class Character : MonoBehaviour
 
     public void ApplyDamage(int damage, Vector3 attachPosition = new Vector3())
     {
+        if (IsInvincible)
+        {
+            return;
+        }
         _health?.ApplyDamage(damage);
 
         if (!IsPlayer)
@@ -252,6 +264,12 @@ public class Character : MonoBehaviour
             SwitchStateTo(CharacterState.BeingHit);
             AddImpact(attachPosition, impactForce);
         }
+    }
+
+    IEnumerator DelayCancelInvincible()
+    {
+        yield return new WaitForSeconds(InvincibleDuration);
+        IsInvincible = false;
     }
 
     private void AddImpact(Vector3 attackerPosition, float force)
