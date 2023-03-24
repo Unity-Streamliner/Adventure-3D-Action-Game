@@ -28,4 +28,13 @@ public class Health : MonoBehaviour
             _character.SwitchStateTo(Character.CharacterState.Dead);
         }
     }
+
+    public void AddHealth(int health)
+    {
+        CurrentHealth += health;
+        if (CurrentHealth > MaxHealth)
+        {
+            CurrentHealth = MaxHealth;
+        }
+    }
 }

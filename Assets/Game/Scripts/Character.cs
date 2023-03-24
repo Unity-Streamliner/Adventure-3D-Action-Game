@@ -13,6 +13,9 @@ public class Character : MonoBehaviour
     // Health
     private Health _health;
 
+    // Coin
+    public int Coin;
+
     // Heal Orb
     public GameObject ItemToDrop;
 
@@ -329,6 +332,29 @@ public class Character : MonoBehaviour
     {
         if (ItemToDrop == null) { return; }
         Instantiate(ItemToDrop, transform.position, Quaternion.identity);
+    }
+
+    public void PickUpItem(PickUp item)
+    {
+        switch(item.Type)
+        {
+            case PickUp.PickUpType.Heal:
+                AddHealth(item.Value);
+                break;
+            case PickUp.PickUpType.Coin:
+                AddCoin(item.Value);
+                break;
+        }
+    }
+
+    private void AddHealth(int health)
+    {
+        _health.AddHealth(health);
+    }
+
+    private void AddCoin(int coin)
+    {
+        Coin += coin;
     }
 
 }

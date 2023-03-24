@@ -1245,6 +1245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPlayer: 1
+  Coin: 0
   ItemToDrop: {fileID: 0}
   CurrentState: 0
   MoveSpeed: 5
@@ -1619,6 +1620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPlayer: 0
+  Coin: 0
   ItemToDrop: {fileID: 5200800175405739319, guid: bf448f2b8fdd941d2ab9fbe97b0588be, type: 3}
   CurrentState: 0
   MoveSpeed: 2
