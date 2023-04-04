@@ -23,7 +23,6 @@ public class PlayerInput : MonoBehaviour
         {
             SpaceKeyDown = Input.GetKeyDown(KeyCode.Space);
         }
-        print($"SpaceKey {SpaceKeyDown} ${Time.deltaTime}");
         HorizontalInput = Input.GetAxis(horizontalTag);
         VerticalInput = Input.GetAxis(verticalTag);
     }
