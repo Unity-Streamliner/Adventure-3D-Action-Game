@@ -1319,6 +1319,7 @@ MonoBehaviour:
   Gravity: -20
   AttackSlideDuration: 0.4
   AttackSlideSpeed: 0.06
+  SlideSpeed: 9
   IsInvincible: 0
   InvincibleDuration: 2
 --- !u!114 &1092541061
@@ -1336,6 +1337,7 @@ MonoBehaviour:
   MouseButtonDown: 0
   HorizontalInput: 0
   VerticalInput: 0
+  SpaceKeyDown: 0
 --- !u!95 &1092541062
 Animator:
   serializedVersion: 4
@@ -1774,6 +1776,7 @@ MonoBehaviour:
   Gravity: -9.8
   AttackSlideDuration: 0.4
   AttackSlideSpeed: 0.06
+  SlideSpeed: 9
   IsInvincible: 0
   InvincibleDuration: 2
 --- !u!114 &1230082598
