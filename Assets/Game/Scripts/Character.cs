@@ -279,6 +279,7 @@ public class Character : MonoBehaviour
             case CharacterState.Spawn:
                 IsInvincible = true;
                 _currentSpawnTime = SpawnDuration;
+                StartCoroutine(MaterialAppear());
                 break;
         }
 
@@ -358,6 +359,31 @@ public class Character : MonoBehaviour
 
         _materialPropertyBloc.SetFloat("_blink", 0f);
         _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBloc);
+    }
+
+    IEnumerator MaterialAppear()
+    {
+        float dissolveTimeDuration = SpawnDuration;
+        float currentDissolveTime = 0;
+        float dissolveHightStart = -10f;
+        float dissolveHightTarget = 20f;
+        float dissolveHight;
+
+        _materialPropertyBloc.SetFloat("_enableDissolve", 1f);
+        _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBloc);
+
+        while(currentDissolveTime < dissolveTimeDuration)
+        {
+            currentDissolveTime += Time.deltaTime;
+            dissolveHight = Mathf.Lerp(dissolveHightStart, dissolveHightTarget, currentDissolveTime / dissolveTimeDuration);
+            _materialPropertyBloc.SetFloat("_dissolve_height", dissolveHight);
+            _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBloc);
+            yield return null;
+        }
+
+         _materialPropertyBloc.SetFloat("_enableDissolve", 0f);
+        _skinnedMeshRenderer.SetPropertyBlock(_materialPropertyBloc);
+
     }
 
     IEnumerator MaterialDissolve()

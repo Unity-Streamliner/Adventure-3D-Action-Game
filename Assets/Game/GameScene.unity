@@ -1257,6 +1257,7 @@ MonoBehaviour:
   SlideSpeed: 9
   IsInvincible: 0
   InvincibleDuration: 2
+  SpawnDuration: 2
 --- !u!114 &1092541061
 MonoBehaviour:
   m_ObjectHideFlags: 0
