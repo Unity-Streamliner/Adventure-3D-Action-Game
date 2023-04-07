@@ -6,6 +6,7 @@ public class Spawner : MonoBehaviour
 {
     private List<SpawnPoint> spawnPointList;
     private bool hasSpawned;
+    public Collider _collider;
 
     private void Awake()
     {
@@ -33,5 +34,11 @@ public class Spawner : MonoBehaviour
         {
             SpawnCharacters();
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, _collider.bounds.size);
     }
 }

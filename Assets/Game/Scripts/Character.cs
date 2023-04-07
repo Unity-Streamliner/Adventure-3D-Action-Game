@@ -25,7 +25,7 @@ public class Character : MonoBehaviour
     // State Machine
     public enum CharacterState 
     {
-        Normal, Attacking, Dead, BeingHit, Slide
+        Normal, Attacking, Dead, BeingHit, Slide, Spawn
     }
     public CharacterState CurrentState;
     public float MoveSpeed = 5f;
@@ -51,6 +51,10 @@ public class Character : MonoBehaviour
     public bool IsInvincible;
     public float InvincibleDuration = 2f;
 
+    // Spawn
+    public float SpawnDuration = 2f;
+    private float _currentSpawnTime;
+
     // Material animation
     private MaterialPropertyBlock _materialPropertyBloc;
     private SkinnedMeshRenderer _skinnedMeshRenderer;
@@ -72,6 +76,7 @@ public class Character : MonoBehaviour
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _target = GameObject.FindWithTag(_playerTag).transform;
             _navMeshAgent.speed = MoveSpeed;
+            SwitchStateTo(CharacterState.Spawn);
         }
         else 
         {
@@ -168,6 +173,13 @@ public class Character : MonoBehaviour
             case CharacterState.Slide:
                 _movementVelocity = transform.forward * SlideSpeed * Time.deltaTime;
                 break;
+            case CharacterState.Spawn:
+                _currentSpawnTime -= Time.deltaTime;
+                if (_currentSpawnTime <= 0)
+                {
+                    SwitchStateTo(CharacterState.Normal);
+                }
+                break;
         }
         MovePlayer();   
     }
@@ -229,7 +241,9 @@ public class Character : MonoBehaviour
             case CharacterState.BeingHit:
                 break;
             case CharacterState.Slide:
-
+                break;
+            case CharacterState.Spawn:
+                IsInvincible = false;
                 break;
         }
 
@@ -261,6 +275,10 @@ public class Character : MonoBehaviour
                 break;
             case CharacterState.Slide:
                 _animator.SetTrigger("Slide");
+                break;
+            case CharacterState.Spawn:
+                IsInvincible = true;
+                _currentSpawnTime = SpawnDuration;
                 break;
         }
 
