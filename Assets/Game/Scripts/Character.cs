@@ -363,6 +363,7 @@ public class Character : MonoBehaviour
 
     IEnumerator MaterialAppear()
     {
+        
         float dissolveTimeDuration = SpawnDuration;
         float currentDissolveTime = 0;
         float dissolveHightStart = -10f;
