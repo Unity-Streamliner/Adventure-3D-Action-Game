@@ -7,7 +7,7 @@ public class Gate : MonoBehaviour
     public GameObject GateVisual;
     private Collider _gateCollider;
     public float OpenDuration = 2f;
-    public float OpenTargetY = -1.5f;
+    public float OpenTargetY = -2f;
 
     private void Awake() 
     {
@@ -29,4 +29,6 @@ public class Gate : MonoBehaviour
         }
         _gateCollider.enabled = false;
     }
+
+    public void Open() => StartCoroutine(OpenGateAnimation());
 }
