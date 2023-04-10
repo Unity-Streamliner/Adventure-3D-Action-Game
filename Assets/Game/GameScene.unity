@@ -1050,6 +1050,7 @@ GameObject:
   m_Component:
   - component: {fileID: 861059975}
   - component: {fileID: 861059974}
+  - component: {fileID: 861059976}
   m_Layer: 0
   m_Name: Gate
   m_TagString: Untagged
@@ -1086,6 +1087,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &861059976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861059973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 887eb5ae5ceae4dd2994cf99ba99c0e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GateVisual: {fileID: 1608619850}
+  OpenDuration: 2
+  OpenTargetY: -1.5
 --- !u!114 &895292824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1966,6 +1982,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59e037f841b401b41beacdaa9802504d, type: 3}
+--- !u!1 &1608619850 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2183264279611125009, guid: 7a741ae410e730e43a39cc54753aa712, type: 3}
+  m_PrefabInstance: {fileID: 539145057}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1608619851 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1515272055123441579, guid: 7a741ae410e730e43a39cc54753aa712, type: 3}
