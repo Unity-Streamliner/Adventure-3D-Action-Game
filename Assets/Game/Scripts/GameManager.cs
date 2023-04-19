@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public Character PlayerCharacter;
+    public GameUIManager GameUIManager;
+    [HideInInspector] public Character PlayerCharacter;
     private bool _gameIsOver;
 
     private void Awake()
@@ -17,6 +18,10 @@ public class GameManager : MonoBehaviour
         if (_gameIsOver)
         {
             return;
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameUIManager.ToggleUIPause();
         }
         if(PlayerCharacter.CurrentState == Character.CharacterState.Dead)
         {

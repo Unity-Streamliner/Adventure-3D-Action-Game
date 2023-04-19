@@ -3303,6 +3303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a8a29e18f0d4176a03ce9091c78689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameUIManager: {fileID: 8693736422871834704}
   PlayerCharacter: {fileID: 0}
 --- !u!4 &1655446913
 Transform:
@@ -5406,6 +5407,9 @@ MonoBehaviour:
   GameManager: {fileID: 1655446912}
   CoinText: {fileID: 8693736423995774313}
   HealthSlider: {fileID: 8693736423963393578}
+  UIPause: {fileID: 8693736422569329566}
+  UIGameOver: {fileID: 8693736423533316906}
+  UIGameIsFinished: {fileID: 8693736422689017997}
 --- !u!114 &8693736423053696568
 MonoBehaviour:
   m_ObjectHideFlags: 0
