@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private Character _playerCharacter;
+    public Character PlayerCharacter;
     private bool _gameIsOver;
 
     private void Awake()
     {
-        _playerCharacter = GameObject.FindWithTag("Player").GetComponent<Character>();
+        PlayerCharacter = GameObject.FindWithTag("Player").GetComponent<Character>();
     }
 
     private void Update()
@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
-        if(_playerCharacter.CurrentState == Character.CharacterState.Dead)
+        if(PlayerCharacter.CurrentState == Character.CharacterState.Dead)
         {
             _gameIsOver = true;
             GameOver();

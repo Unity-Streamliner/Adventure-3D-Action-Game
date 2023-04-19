@@ -3303,6 +3303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a8a29e18f0d4176a03ce9091c78689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerCharacter: {fileID: 0}
 --- !u!4 &1655446913
 Transform:
   m_ObjectHideFlags: 0
@@ -5314,6 +5315,7 @@ GameObject:
   - component: {fileID: 8693736422871834703}
   - component: {fileID: 8693736422871834702}
   - component: {fileID: 8693736422871834689}
+  - component: {fileID: 8693736422871834704}
   m_Layer: 5
   m_Name: Game Canvas
   m_TagString: Untagged
@@ -5389,6 +5391,21 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &8693736422871834704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8693736422871834691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1287bc21f0fef4c7ba3c6001a3ea0217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameManager: {fileID: 1655446912}
+  CoinText: {fileID: 8693736423995774313}
+  HealthSlider: {fileID: 8693736423963393578}
 --- !u!114 &8693736423053696568
 MonoBehaviour:
   m_ObjectHideFlags: 0
