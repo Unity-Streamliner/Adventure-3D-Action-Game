@@ -19,6 +19,11 @@ public class GameUIManager : MonoBehaviour
 
     private GameUIState _currentState;
 
+    private void Start()
+    {
+        SwitchUIState(GameUIState.GamePlay);
+    }
+
     void Update()
     {
         HealthSlider.value = GameManager.PlayerCharacter.GetComponent<Health>().CurrentHealthPercentage;
@@ -67,4 +72,11 @@ public class GameUIManager : MonoBehaviour
             SwitchUIState(GameUIState.GamePlay);
         }
     }
+
+    public void ButtonMainMenu()
+    {
+
+    }
+
+    public void ButtonRestart() => GameManager.Restart();
 }
