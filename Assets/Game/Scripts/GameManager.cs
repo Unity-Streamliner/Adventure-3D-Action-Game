@@ -43,7 +43,8 @@ public class GameManager : MonoBehaviour
 
     public void ReturnToTheMainMenu()
     {
-
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void Restart()

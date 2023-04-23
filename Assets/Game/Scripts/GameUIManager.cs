@@ -73,10 +73,7 @@ public class GameUIManager : MonoBehaviour
         }
     }
 
-    public void ButtonMainMenu()
-    {
-
-    }
+    public void ButtonMainMenu() => GameManager.ReturnToTheMainMenu();
 
     public void ButtonRestart() => GameManager.Restart();
 }
