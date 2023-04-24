@@ -31,15 +31,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void GameOver()
-    {
-        Debug.Log("GAME OVER");
-    }
+    private void GameOver() => GameUIManager.ShowGameOverUI();
 
-    public void GameIsFinished()
-    {
-        Debug.Log("GAME IS FINISHED");
-    }
+    public void GameIsFinished() => GameUIManager.ShowGameIsFinished();
 
     public void ReturnToTheMainMenu()
     {

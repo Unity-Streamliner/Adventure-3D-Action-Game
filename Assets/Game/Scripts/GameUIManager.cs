@@ -76,4 +76,8 @@ public class GameUIManager : MonoBehaviour
     public void ButtonMainMenu() => GameManager.ReturnToTheMainMenu();
 
     public void ButtonRestart() => GameManager.Restart();
+
+    public void ShowGameOverUI() => SwitchUIState(GameUIState.GameOver);
+
+    public void ShowGameIsFinished() => SwitchUIState(GameUIState.GameIsFinished);
 }
