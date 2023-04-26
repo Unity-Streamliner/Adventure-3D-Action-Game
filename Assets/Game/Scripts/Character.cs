@@ -269,6 +269,11 @@ public class Character : MonoBehaviour
                 _characterController.enabled = false;
                 _animator.SetTrigger("Dead");
                 StartCoroutine(MaterialDissolve());
+                if (!IsPlayer)
+                {
+                    SkinnedMeshRenderer mesh = GetComponent<SkinnedMeshRenderer>();
+                    mesh.gameObject.layer = 0;
+                }
                 break;
             case CharacterState.BeingHit:
                 _animator.SetTrigger("BeingHit");
