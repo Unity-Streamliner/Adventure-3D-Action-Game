@@ -152,7 +152,7 @@ public class Character : MonoBehaviour
                         {
                             _playerInput.MouseButtonDown = false;
                             SwitchStateTo(CharacterState.Attacking);
-                            CalculatePlayerMovement();
+                            //CalculatePlayerMovement();
                         }
                     }
                 }
@@ -263,6 +263,7 @@ public class Character : MonoBehaviour
                 if (IsPlayer)
                 {
                     attackStartTime = Time.time;
+                    RotateToCursor();
                 }
                 break;
             case CharacterState.Dead:
@@ -460,6 +461,34 @@ public class Character : MonoBehaviour
         if (CurrentState != CharacterState.Dead)
         {
              transform.LookAt(_target, Vector3.up);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hitResult;
+        float rayDistance = 1000f; 
+        float sphereRadius = 1f;
+
+        if (Physics.Raycast(ray, out hitResult, rayDistance, 1<<LayerMask.NameToLayer("CursorTest")))
+        {
+            Vector3 cursorPosition = hitResult.point;
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(cursorPosition, sphereRadius);
+        }
+    }
+
+    private void RotateToCursor()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hitResult;
+        float rayDistance = 1000f; 
+
+        if (Physics.Raycast(ray, out hitResult, rayDistance, 1<<LayerMask.NameToLayer("CursorTest")))
+        {
+            Vector3 cursorPosition = hitResult.point;
+            transform.rotation = Quaternion.LookRotation(cursorPosition - transform.position, Vector3.up);
         }
     }
 
