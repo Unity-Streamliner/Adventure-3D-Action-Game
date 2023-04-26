@@ -164,11 +164,6 @@ public class Character : MonoBehaviour
             case CharacterState.Dead:
                 return;
             case CharacterState.BeingHit:
-                if (impactOnCharacter.magnitude > 0.2f)
-                {
-                    _movementVelocity = impactOnCharacter * Time.deltaTime;
-                }
-                impactOnCharacter = Vector3.Lerp(impactOnCharacter, Vector3.zero, Time.deltaTime * 5);
                 break;
             case CharacterState.Slide:
                 _movementVelocity = transform.forward * SlideSpeed * Time.deltaTime;
@@ -186,8 +181,18 @@ public class Character : MonoBehaviour
 
     private void MovePlayer()
     {
+        if (impactOnCharacter.magnitude > 0.2f)
+        {
+            _movementVelocity = impactOnCharacter * Time.deltaTime;
+        }
+        impactOnCharacter = Vector3.Lerp(impactOnCharacter, Vector3.zero, Time.deltaTime * 5);
         if (!IsPlayer) 
         {
+            if (CurrentState != CharacterState.Normal)
+            {
+                _characterController.Move(_movementVelocity);
+                _movementVelocity = Vector3.zero;
+            }
             return;
         }
         if (!_characterController.isGrounded)
@@ -323,6 +328,10 @@ public class Character : MonoBehaviour
         {
             SwitchStateTo(CharacterState.BeingHit);
             AddImpact(attachPosition, impactForce);
+        } 
+        else 
+        {
+            AddImpact(attachPosition, impactForce / 4);
         }
     }
 
